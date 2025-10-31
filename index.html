@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fugazzesions — 7 de Diciembre</title>
+  <meta name="description" content="Fugazzesions: eventos de patinaje + pizza. Próxima fecha: 7 de diciembre. Info, horarios, inscripción y próximos eventos." />
+  <meta property="og:title" content="Fugazzesions — 7 de Diciembre" />
+  <meta property="og:description" content="Pizza, Patín y Punto. Sumate a la próxima Fugazzesions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/fugazzesions/og.jpg" />
+  <link rel="icon" href="/images/fugazzesions/favicon.png" />
+  <style>
+    :root{
+      /* Paleta clara basada en el logo */
+      --paper:#fff8f0;        /* crema claro principal */
+      --ink:#1a1a1a;          /* texto principal oscuro */
+      --red:#d72638;          /* rojo logo */
+      --green:#0d7f45;        /* verde logo */
+      --muted:#6b6f78;        /* secundario */
+      --surface:#ffffff;      /* tarjetas claras */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; -webkit-font-smoothing:antialiased}
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1120px,92vw); margin:0 auto}
+
+    /* Motivo cuadriculado tipo mantel (divisor) */
+    .checkered{position:relative; isolation:isolate}
+    .checkered::before{content:""; position:absolute; inset:0; z-index:-1; opacity:.12;
+      background:repeating-linear-gradient(45deg, var(--red) 0 20px, transparent 20px 40px),
+                 repeating-linear-gradient(-45deg, var(--red) 0 20px, transparent 20px 40px);
+      mask: linear-gradient(#000 0 56px, transparent 56px 100%);
+    }
+
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(10px); background: color-mix(in oklab, var(--paper) 85%, transparent); border-bottom:1px solid rgba(0,0,0,.08)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:.8rem 0}
+    .logo{display:flex; align-items:center; gap:.7rem; font-weight:900}
+    .logo .dot{width:.8rem; height:.8rem; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px color-mix(in oklab, var(--green) 30%, transparent)}
+    .nav-links{display:flex; gap:1rem}
+
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.1rem; border-radius:1rem; font-weight:800; border:2px solid var(--green); background:var(--green); color:#fff}
+    .btn.ghost{background:transparent; color:var(--ink); border-color:rgba(0,0,0,.18)}
+    .btn.red{border-color:var(--red); background:var(--red); color:#fff}
+
+    /* HERO */
+    .hero{padding:6.5rem 0 4.5rem}
+    .hero .grid{display:grid; gap:2rem; grid-template-columns: 1.1fr .9fr}
+    h1{font-size: clamp(2.1rem, 3.6vw, 3.2rem); line-height:1.12; margin:.4rem 0 .6rem}
+    .lead{color:var(--muted)}
+
+    /* Fondo con foto en hero (overlay claro para legibilidad) */
+    .with-photo{position:relative; isolation:isolate}
+    .with-photo::before{content:""; position:absolute; inset:0; z-index:-2; background: center/cover no-repeat var(--hero-image); filter:saturate(.92) contrast(1.05) brightness(.92)}
+    .with-photo::after{content:""; position:absolute; inset:0; z-index:-1; background: linear-gradient(180deg, rgba(255,248,240,.82), rgba(255,248,240,.88));}
+
+    /* Bloques */
+    section{padding:3.8rem 0; border-top:1px solid rgba(0,0,0,.06)}
+    h2{font-size: clamp(1.45rem, 2.2vw, 2rem); margin:0 0 .8rem}
+    .subtle{color:var(--muted)}
+
+    .feature{background: var(--surface); border:2px solid rgba(215,38,56,.2); border-radius:1.1rem; padding:1rem; box-shadow:0 6px 24px rgba(0,0,0,.06)}
+    .features{display:grid; gap:1rem; grid-template-columns: repeat(3,minmax(0,1fr))}
+
+    /* Agenda */
+    .schedule{display:grid; gap:1rem; grid-template-columns: .9fr 1.1fr}
+    .paper{background:var(--paper); color:var(--ink); border-radius:1rem; padding:1rem; border:2px solid var(--red)}
+    .paper h3{margin:.2rem 0 .6rem}
+    .paper .row{display:flex; justify-content:space-between; border-top:1px dashed rgba(0,0,0,.2); padding:.55rem 0}
+    .paper .row:first-child{border-top:none}
+
+    /* Próximo evento */
+    .next-card{background:var(--surface); border:2px solid rgba(215,38,56,.25); border-radius:1.2rem; padding:1rem; box-shadow:0 8px 30px rgba(0,0,0,.08)}
+    .next-row{display:grid; gap:1rem; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start}
+    .next-row .label{display:block; color:var(--muted); font-size:.9rem}
+    .next-row .value{font-weight:800; font-size:1.1rem}
+    .next-cta{display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1rem}
+
+    /* Próximos eventos */
+    .events{display:grid; gap:1rem; grid-template-columns: repeat(3,minmax(0,1fr))}
+    .event{background:var(--surface); border:2px solid rgba(215,38,56,.2); border-radius:1rem; padding:1rem}
+
+    /* Footer */
+    footer{padding:2.5rem 0 4rem; color:#6b6f78}
+    footer .grid{display:grid; grid-template-columns: 1fr auto; align-items:center}
+
+    /* Responsive */
+    @media (max-width: 980px){ .hero .grid{grid-template-columns:1fr} .features{grid-template-columns:1fr 1fr} .schedule{grid-template-columns:1fr} .events{grid-template-columns:1fr 1fr} }
+    @media (max-width: 560px){ .features,.events{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <header class="checkered">
+    <div class="container nav">
+      <a class="logo" href="#home" aria-label="Inicio">
+        <span class="dot"></span><span>Fugazzesions</span>
+      </a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#evento">Evento</a>
+        <a href="#proximo">Próximo</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#inscripcion">Inscripción</a>
+        <a href="#proximos">Próximos</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <!-- HERO / EVENTO ACTUAL -->
+    <section id="evento" class="hero with-photo" style="--hero-image: url('/images/fugazzesions/hero.jpg')">
+      <div class="container grid">
+        <div>
+          <div style="display:flex; gap:.5rem; flex-wrap:wrap">
+            <span class="badge" style="background:var(--red); color:#fff; border-radius:999px; padding:.35rem .65rem; font-weight:800">7 de Diciembre</span>
+            <span class="badge" style="background:var(--green); color:#fff; border-radius:999px; padding:.35rem .65rem; font-weight:800">Pizza, Patín y Punto</span>
+          </div>
+          <h1>Fugazzesions: la sesión de patín que huele a horno.</h1>
+          <p class="lead">Una jornada para patinar, compartir y comer pizza. Todos los niveles, ambiente amigable.</p>
+          <div class="ticket" style="display:flex; gap:.9rem; margin-top:1.1rem">
+            <a class="btn red" href="#inscripcion">Conseguir entrada</a>
+            <a class="btn ghost" href="#agenda">Ver agenda</a>
+          </div>
+        </div>
+        <!-- Sin ficha rápida aquí: ahora es un bloque independiente abajo -->
+      </div>
+    </section>
+
+    <!-- PRÓXIMO EVENTO (bloque independiente) -->
+    <section id="proximo" class="checkered">
+      <div class="container">
+        <h2>Próximo evento</h2>
+        <div class="next-card">
+          <div class="next-row">
+            <div><span class="label">Fecha</span><div class="value">Dom 7/12</div></div>
+            <div><span class="label">Horario</span><div class="value">12:00–23:00</div></div>
+            <div><span class="label">Lugar</span><div class="value">Ballivián 2329, CABA</div></div>
+          </div>
+          <div class="next-cta">
+            <a class="btn red" href="#inscripcion">Inscribirme</a>
+            <a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ballivi%C3%A1n+2329,+CABA">Cómo llegar</a>
+            <button class="btn" id="addCal2">Añadir al calendario</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ¿QUÉ VAS A ENCONTRAR? -->
+    <section class="checkered">
+      <div class="container">
+        <h2>¿Qué vas a encontrar?</h2>
+        <p class="subtle">Patinaje libre, buena música y porciones generosas. Si es tu primera vez, vení igual: hay espacio para todos los niveles.</p>
+        <div class="features">
+          <article class="feature"><h3>Espacio seguro</h3><p>Ambiente comunitario. Respeto de normas y uso de protecciones recomendado.</p></article>
+          <article class="feature"><h3>Desafíos opcionales</h3><p>Mini retos técnicos con premios comestibles (guiño). Te anotás si querés.</p></article>
+          <article class="feature"><h3>Pizza & chill</h3><p>Pausa para reponer energía. Opciones veg.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section id="agenda">
+      <div class="container schedule">
+        <div>
+          <h2>Agenda</h2>
+          <p class="subtle">Horarios tentativos (pueden ajustarse según clima y asistencia).</p>
+          <div class="paper">
+            <h3>Domingo 7/12</h3>
+            <div class="row"><span>Acreditación</span><span>12:00</span></div>
+            <div class="row"><span>Warm‑up libre</span><span>12:30</span></div>
+            <div class="row"><span>Mini desafíos</span><span>16:00</span></div>
+            <div class="row"><span>Pizza break</span><span>19:00</span></div>
+            <div class="row"><span>Jam colectiva</span><span>20:00</span></div>
+            <div class="row"><span>Cierre + foto</span><span>23:00</span></div>
+          </div>
+        </div>
+        <aside>
+          <h2>Ubicación</h2>
+          <p class="subtle">Indicá la sede exacta y un link a Google Maps para facilitar la llegada.</p>
+          <div class="feature">
+            <p><strong>Sede:</strong> Fugazzesions — Ballivián</p>
+            <p><strong>Dirección:</strong> Ballivián 2329, Ciudad Autónoma de Buenos Aires</p>
+            <p><a class="btn ghost" id="mapa" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ballivi%C3%A1n+2329,+CABA">Ver mapa</a></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- INSCRIPCIÓN (Google Forms) -->
+    <section id="inscripcion">
+      <div class="container">
+        <h2>Inscripción</h2>
+        <p class="subtle">Temporalmente deshabilitada mientras ajustamos el formulario.</p>
+        <div class="feature" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+          <div>
+            <strong>Pronto vuelve el formulario de Google.</strong>
+            <p class="subtle" style="margin:.3rem 0 0">Si querés reservar tu lugar ahora, escribinos por Instagram o por email.</p>
+          </div>
+          <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+            <a class="btn" target="_blank" rel="noopener" href="https://instagram.com/fugazzesions">Mandar DM</a>
+            <a class="btn ghost" href="mailto:hola@fugazzesions.com?subject=Reserva%20Fugazzesions%207%20de%20Diciembre">Escribir por email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRÓXIMOS EVENTOS -->
+    <section id="proximos" class="checkered">
+      <div class="container">
+        <h2>Próximos eventos</h2>
+        <p class="subtle">Usá estas tarjetas para fechas futuras (dejá “Pronto” si no hay confirmación).</p>
+        <div class="events">
+          <div class="event"><strong>Enero</strong><p class="subtle">Pronto</p></div>
+          <div class="event"><strong>Febrero</strong><p class="subtle">Pronto</p></div>
+          <div class="event"><strong>Marzo</strong><p class="subtle">Pronto</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <h2>Preguntas frecuentes</h2>
+        <div class="features" style="grid-template-columns:1fr 1fr 1fr">
+          <article class="feature"><h3>¿Nivel?</h3><p>Todos los niveles. Cuidamos la convivencia en pista.</p></article>
+          <article class="feature"><h3>¿Clima?</h3><p>Si llueve y la sede es a cielo abierto, reprogramamos. Avisamos por Instagram.</p></article>
+          <article class="feature"><h3>¿Qué llevo?</h3><p>Agua, protecciones y muchas ganas. Hay pizza.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO / REDES -->
+    <section id="contacto">
+      <div class="container">
+        <h2>Contacto</h2>
+        <p class="subtle">Seguinos en Instagram para enterarte primero.</p>
+        <div style="display:flex; gap:.8rem; flex-wrap:wrap">
+          <a class="btn" target="_blank" rel="noopener" href="https://instagram.com/fugazzesions">@fugazzesions</a>
+          <a class="btn ghost" href="mailto:hola@fugazzesions.com">hola@fugazzesions.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container grid">
+      <small>© <span id="y"></span> Fugazzesions. Pizza, Patín y Punto.</small>
+      <small>Hecho con HTML/CSS. Estética pizzería + details limpios.</small>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{ const id=a.getAttribute('href'); const el=document.querySelector(id); if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'});} });
+    });
+
+    // .ics con horario 12:00–23:00 (hora Buenos Aires)
+    function downloadICS(){
+      const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Fugazzesions//Event//ES
+BEGIN:VEVENT
+UID:${Date.now()}@fugazzesions
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g,'').replace(/\..+/,'')}Z
+SUMMARY:Fugazzesions
+DESCRIPTION:Pizza, Patín y Punto.
+DTSTART;TZID=America/Argentina/Buenos_Aires:20251207T120000
+DTEND;TZID=America/Argentina/Buenos_Aires:20251207T230000
+LOCATION:Ballivián 2329, Ciudad Autónoma de Buenos Aires
+END:VEVENT
+END:VCALENDAR`;
+      const blob = new Blob([ics], {type:'text/calendar'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'fugazzesions-2025-12-07.ics';
+      a.click();
+      setTimeout(()=>URL.revokeObjectURL(url), 5000);
+    }
+    document.getElementById('addCal2')?.addEventListener('click', downloadICS);
+
+    // JSON-LD para SEO del evento con horario preciso
+    const ld = {
+      '@context':'https://schema.org', '@type':'Event',
+      name:'Fugazzesions', description:'Pizza, Patín y Punto.',
+      startDate:'2025-12-07T12:00:00-03:00', endDate:'2025-12-07T23:00:00-03:00',
+      eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',
+      eventStatus:'https://schema.org/EventScheduled',
+      location:{ '@type':'Place', name:'Ballivián', address:'Ballivián 2329, Ciudad Autónoma de Buenos Aires' },
+      image:['/images/fugazzesions/og.jpg'], organizer:{ '@type':'Organization', name:'Fugazzesions' }
+    };
+    const s = document.createElement('script'); s.type='application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+  </script>
+</body>
+</html>
