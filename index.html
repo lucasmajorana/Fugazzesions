@@ -97,6 +97,15 @@
     /* Contacto */
     .contact{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow)}
 
+    /* Centrar botones en la sección Contacto */
+    #contacto .container > p:last-of-type{
+      display:flex;
+      justify-content:center;
+      gap:.8rem;
+      flex-wrap:wrap;
+      margin-top:.8rem;
+    }
+
     /* Footer */
     footer{padding:2.2rem 0 3rem; color:#4d564b}
 
@@ -149,14 +158,93 @@
   .faq-plain summary { cursor:pointer; font-weight:800; list-style:none; }
   .faq-plain summary::-webkit-details-marker{display:none}
   .faq-plain details[open] summary { color:var(--verde); }
-  /* —— Logos sin caja —— */
+  /* —— Logos sin caja (grid básica) —— */
   .sponsors-plain { display:grid; gap:1.2rem; align-items:center; justify-items:center; grid-template-columns:repeat(3,minmax(0,1fr)); }
   .sponsors-plain img { max-height:56px; max-width:80%; filter:contrast(1.05); }
   @media (max-width:980px){ .sponsors-plain{grid-template-columns:1fr 1fr} }
   @media (max-width:560px){ .sponsors-plain{grid-template-columns:1fr} }
+
+  /* —— Presentan: 3 destacados + carrusel —— */
+  .sponsors-featured{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.6rem; align-items:center; justify-items:center; margin:1.2rem 0 1.4rem}
+  .sponsors-featured img{max-width:min(260px,26vw); max-height:96px}
+
+  .sponsors-slider-wrap{position:relative}
+  .sponsors-slider{display:grid; grid-auto-flow:column; grid-auto-columns:minmax(180px,1fr); gap:1.2rem; overflow-x:auto; padding:.5rem 0 1rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch}
+  .sponsors-slider::-webkit-scrollbar{height:8px}
+  .sponsors-slider::-webkit-scrollbar-thumb{background:#e1dac8; border-radius:6px}
+  .sponsors-item{scroll-snap-align:start; display:grid; place-items:center; height:110px}
+  .sponsors-item img{max-width:180px; max-height:70px}
+
+  .slider-btn{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:999px; border:1px solid #d9d2c4; background:#fff; box-shadow:0 6px 20px rgba(0,0,0,.08); display:grid; place-items:center; cursor:pointer}
+  .slider-btn:hover{background:#f7f4ec}
+  .slider-btn.prev{left:-6px}
+  .slider-btn.next{right:-6px}
+
+  @media (max-width:680px){ .lc-item{height:96px; flex:0 0 100%;} .lc-item img{max-height:64px} .lc-btn{display:none} }
+    .sponsors-featured img:nth-child(3){grid-column:1/-1; justify-self:center}
+    .slider-btn{display:none}
+
   /* —— Utilidad de título y subtítulo —— */
   .section-title { margin:0 0 .3rem; }
   .section-sub { color:var(--muted); margin:0 0 1rem; }
+  .section-title { margin:0 0 .3rem; }
+  .section-sub { color:var(--muted); margin:0 0 1rem; }
+
+  /*/* Hero visual simple (sin patrón) */
+
+  /* —— Presentan: carrusel con 3 visibles, centro más grande —— */
+  .logos-carousel{position:relative; margin:2.2rem 0 0}
+  .lc-viewport{overflow:hidden}
+  .lc-track{display:flex; align-items:center; transition:transform .55s cubic-bezier(.2,.7,.2,1); will-change:transform}
+  .lc-item{flex:0 0 33.3333%; display:grid; place-items:center; height:120px; opacity:.7; transform:scale(.96); transition:transform .35s ease, opacity .35s ease}
+  .lc-item.is-center{transform:scale(1.28); opacity:1}
+  .lc-item img{max-width:86%; max-height:80px; object-fit:contain; filter:contrast(1.05)}
+  .lc-btn{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:999px; border:1px solid #d9d2c4; background:#fff; box-shadow:0 6px 20px rgba(0,0,0,.08); display:grid; place-items:center; cursor:pointer}
+  .lc-btn:hover{background:#f7f4ec}
+  .lc-btn.prev{left:-6px}
+  .lc-btn.next{right:-6px}
+  @media (max-width:680px){ .lc-item{height:96px} .lc-item img{max-height:64px} .lc-btn{display:none} }
+
+  /* —— Cards Carousel: 3 visibles (1 en mobile), centro más grande —— */
+  .cards-carousel{position:relative; margin:1.2rem 0 0}
+  .cc-viewport{overflow:hidden}
+  .cc-track{display:flex; align-items:stretch; transition:transform .55s cubic-bezier(.2,.7,.2,1); will-change:transform}
+  .cc-item{flex:0 0 33.3333%; padding:.6rem; opacity:.8; transform:scale(.96); transition:transform .35s ease, opacity .35s ease}
+  .cc-item.is-center{transform:scale(1.06); opacity:1}
+  .cc-card{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column; justify-content:flex-start}
+  .cc-btn{position:absolute; top:50%; transform:translateY(-50%); width:38px; height:38px; border-radius:999px; border:1px solid #d9d2c4; background:#fff; box-shadow:0 6px 20px rgba(0,0,0,.08); display:grid; place-items:center; cursor:pointer}
+  .cc-btn:hover{background:#f7f4ec}
+  .cc-btn.prev{left:-6px}
+  .cc-btn.next{right:-6px}
+  @media (max-width:860px){ .cc-item{flex-basis:50%} }
+  @media (max-width:680px){ .cc-item{flex-basis:100%} .cc-item.is-center{transform:scale(1.02)} .cc-btn{display:none} }
+
+  /* Quitar viñetas y márgenes de las listas/carousels */
+  .lc-track, .cc-track{ list-style:none; margin:0; padding:0; }
+
+  /* Centrar encabezados de todas las secciones (excepto el hero) */
+  section:not(.hero) .section-title { text-align: center; }
+  section:not(.hero) .eyebrow,
+  section:not(.hero) .section-sub { 
+    display: block; 
+    text-align: center; 
+    margin-left: auto; 
+    margin-right: auto;
+  } 
+
+  /* —— Agenda estilizada —— */
+  .agenda-wrap{display:grid; gap:1.4rem; grid-template-columns:1.1fr .9fr; align-items:start}
+  .agenda-timeline{position:relative; margin:0; padding:0 0 0 1.4rem; list-style:none}
+  .agenda-timeline::before{content:""; position:absolute; left:.4rem; top:.3rem; bottom:.3rem; width:2px; background:#e3ddce}
+  .agenda-item{position:relative; padding:.65rem 0}
+  .agenda-item::before{content:""; position:absolute; left:-.01rem; top:1.05rem; width:.8rem; height:.8rem; border-radius:50%; background:var(--verde); box-shadow:0 0 0 3px var(--cream)}
+  .agenda-time{display:inline-block; font-weight:900; color:var(--verde); margin-right:.4rem}
+  .agenda-title{font-weight:800}
+  .agenda-note{color:var(--muted); margin:.1rem 0 0}
+  .loc-card{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow)}
+  .loc-card .btn-row{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.6rem}
+  @media (max-width:980px){ .agenda-wrap{grid-template-columns:1fr} }
+
 </style>
 </head>
 <body>
@@ -164,7 +252,7 @@
   <header>
     <div class="container nav">
       <a class="logo" href="#home" aria-label="Inicio">
-        <img src="pizza.png" alt="" style="width:28px;height:28px"> Fugazzesions
+        <img src="cajapizza.jpg" alt="" style="width:28px;height:28px"> Fugazzesions
       </a>
       <nav class="nav-links" aria-label="Principal">
         <a href="#home">Inicio</a>
@@ -187,8 +275,7 @@
           <p class="lead">Una sesión abierta, buena música y porciones generosas. Apto todos los niveles — te esperamos.</p>
           <div class="cta">
             <a class="btn verde" href="#inscripcion">Reservar lugar</a>
-            <a class="btn ghost" href="#agenda">Ver agenda</a>
-            <a class="btn rojo" id="addCal" href="#">.ics</a>
+            <a class="btn rojo" href="#agenda">Ver agenda</a>
           </div>
           <div style="display:flex; gap:1rem; margin-top:1rem; align-items:center">
             <span class="badge" aria-label="Ubicación">📍 Ballivián 2329</span>
@@ -206,58 +293,105 @@
   <div class="container">
     <span class="eyebrow">Presentan</span>
     <h2 id="presentan-h" class="section-title">Marcas y espacios que hacen posible la sesión</h2>
-    <div class="sponsors-plain">
-      <img src="pnb\plano.png" alt="Plano">
-      <img src="pnb\majorani.png" alt="Majorani">
-      <img src="pnb\sauzal.png" alt="Sauzal">
-      <img src="pnb\samana.png" alt="Samana hábitat cultural">
-      <img src="pnb\hazzard.png" alt="HBK">
-      <img src="pnb\coffe.png" alt="Drift cars & coffee">
-      <img src="pnb\omnibus.png" alt="Omnibus">
+
+    <div class="logos-carousel" role="region" aria-roledescription="carousel" aria-label="Patrocinadores">
+      <!-- <button class="lc-btn prev" type="button" aria-label="Anterior">‹</button> -->
+      <div class="lc-viewport">
+        <ul class="lc-track" id="lcTrack">
+          <li class="lc-item"><img src="pnb/plano.png"   alt="Plano"></li>
+          <li class="lc-item"><img src="pnb/majorani.png"   alt="Majorani"></li>
+          <li class="lc-item"><img src="pnb/samana.png"  alt="Samana hábitat cultural"></li>
+          <li class="lc-item"><img src="pnb/hazzard.png"     alt="HBK"></li>
+          <li class="lc-item"><img src="pnb/sauzal.png"  alt="Sauzal"></li>
+          <li class="lc-item"><img src="pnb/coffe.png"   alt="Drift cars & coffee"></li>
+          <li class="lc-item"><img src="pnb/omnibus.png" alt="Ómnibus"></li>
+        </ul>
+      </div>
+      <!-- <button class="lc-btn next" type="button" aria-label="Siguiente">›</button> -->
     </div>
   </div>
 </section>
 
     <!-- =================== QUÉ VAS A ENCONTRAR =================== -->
-    <section id="encontrar" class="surface-none" aria-labelledby="enc-h">
+    <section id="encontrar" class="section-observed" aria-labelledby="enc-h">
   <div class="container">
     <span class="eyebrow">Para todos los niveles</span>
     <h2 id="enc-h" class="section-title">¿Qué vas a encontrar?</h2>
     <p class="section-sub">Ambiente seguro, retos opcionales y buena comida.</p>
-    <div class="rows">
-      <div class="row-line">
-        <strong>Espacio seguro</strong>
-        <p>Ambiente comunitario. Respeto de normas y protecciones recomendado.</p>
+
+    <div class="cards-carousel" role="region" aria-roledescription="carousel" aria-label="Qué vas a encontrar">
+      <!-- <button class="cc-btn prev" type="button" aria-label="Anterior">‹</button> -->
+      <div class="cc-viewport">
+        <ul class="cc-track" id="ccTrack">
+          <li class="cc-item">
+            <article class="cc-card">
+              <h3>Espacio seguro</h3>
+              <p>Ambiente comunitario. Respeto de normas y protecciones recomendado.</p>
+            </article>
+          </li>
+          <li class="cc-item">
+            <article class="cc-card">
+              <h3>Desafíos opcionales</h3>
+              <p>Mini‑retos técnicos con premios comestibles. Te anotás si querés.</p>
+            </article>
+          </li>
+          <li class="cc-item">
+            <article class="cc-card">
+              <h3>Pizza & chill</h3>
+              <p>Pausa para reponer energía. Opciones veg.</p>
+            </article>
+          </li>
+          <li class="cc-item">
+            <article class="cc-card">
+              <h3>Buen sonido</h3>
+              <p>Música sonando durante todo el evento acompañada por visuales en tiempo real.</p>
+            </article>
+          </li>
+          <li class="cc-item">
+            <article class="cc-card">
+              <h3>Demostraciones</h3>
+              <p>Best trick invitational de Inline y Quad Skate.</p>
+            </article>
+          </li>
+        </ul>
       </div>
-      <div class="row-line">
-        <strong>Desafíos opcionales</strong>
-        <p>Mini-retos técnicos con premios comestibles. Te anotás si querés.</p>
-      </div>
-      <div class="row-line">
-        <strong>Pizza & chill</strong>
-        <p>Pausa para reponer energía. Opciones veg.</p>
-      </div>
+      <!-- <button class="cc-btn next" type="button" aria-label="Siguiente">›</button> -->
     </div>
   </div>
 </section>
 
     <!-- =================== AGENDA =================== -->
-    <section id="agenda" class="surface-none" aria-labelledby="ag-h">
+    <section id="agenda" class="section-observed" aria-labelledby="ag-h">
   <div class="container">
     <span class="eyebrow">Domingo 7/12</span>
     <h2 id="ag-h" class="section-title">Agenda</h2>
-    <ol class="timeline">
-      <li><span class="time">12:00</span> Acreditación</li>
-      <li><span class="time">12:30</span> Warm‑up libre</li>
-      <li><span class="time">16:00</span> Mini desafíos</li>
-      <li><span class="time">19:00</span> Pizza break</li>
-      <li><span class="time">20:00</span> Jam colectiva</li>
-      <li><span class="time">23:00</span> Cierre + foto</li>
-    </ol>
+
+    <div class="agenda-wrap">
+      <div>
+        <ol class="agenda-timeline">
+          <li class="agenda-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="agenda-time">12:00</span><span class="agenda-title">Acreditación</span></li>
+          <li class="agenda-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="agenda-time">12:30</span><span class="agenda-title">Warm‑up libre</span></li>
+          <li class="agenda-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="agenda-time">16:00</span><span class="agenda-title">Mini desafíos<div class="agenda-note">Inscripción voluntaria</div></span></li>
+          <li class="agenda-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="agenda-time">19:00</span><span class="agenda-title">Pizza break<div class="agenda-note">Opciones veg</div></span></li>
+          <li class="agenda-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="agenda-time">20:00</span><span class="agenda-title">Jam colectiva</span></li>
+          <li class="agenda-item">&nbsp;&nbsp;&nbsp;&nbsp;<span class="agenda-time">23:00</span><span class="agenda-title">Cierre + foto</span></li>
+        </ol>
+      </div>
+      <aside>
+        <div class="loc-card">
+          <h3 style="margin-top:0">Ubicación</h3>
+          <p style="margin:.2rem 0 .6rem"><strong>Fugazzesions — Ballivián</strong><br/>Ballivián 2329, CABA</p>
+          <div class="btn-row">
+            <a class="btn verde" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ballivi%C3%A1n+2329,+CABA">Ver en Google Maps</a>
+            <a class="btn rojo" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Ballivi%C3%A1n+2329,+CABA">Cómo llegar</a>
+          </div>
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 
-    <!-- =================== INSCRIPCIÓN (lite) =================== -->
+    <!-- =================== INSCRIPCIÓN (lite) ===================
     <section id="inscripcion" class="section-observed" aria-labelledby="ins-h">
       <div class="container">
         <span class="eyebrow">Cupos limitados</span>
@@ -277,7 +411,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section>  -->
 
     <!-- =================== FAQ =================== -->
     <section id="faq" class="surface-none faq-plain" aria-labelledby="faq-h">
@@ -306,17 +440,16 @@
     <h2 id="ct-h" class="section-title">Hablemos</h2>
     <p class="section-sub">Seguinos en Instagram para enterarte primero.</p>
     <p>
-      <a class="btn verde" target="_blank" rel="noopener" href="https://instagram.com/fugazzesions">@fugazzesions</a>
-      <a class="btn ghost" href="mailto:hola@fugazzesions.com">hola@fugazzesions.com</a>
+      <a class="btn verde" target="_blank" rel="noopener" href="https://www.instagram.com/fugazzesions/">@fugazzesions</a>
+      <a class="btn rojo" href="mailto:hola@fugazzesions.com">hola@fugazzesions.com</a>
     </p>
   </div>
 </section>
   </main>
 
   <footer>
-    <div class="container" style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+    <div class="container" style="display:flex; justify-content: center; gap:1rem; flex-wrap:wrap">
       <small>© <span id="y"></span> Fugazzesions. Pizza, Patín y Punto.</small>
-      <small>One‑page crema/verde/rojo con damero.</small>
     </div>
   </footer>
 
@@ -365,6 +498,103 @@
     // JSON-LD SEO
     const ld={ '@context':'https://schema.org','@type':'Event', name:'Fugazzesions', description:'Pizza, Patín y Punto.', startDate:'2025-12-07T12:00:00-03:00', endDate:'2025-12-07T23:00:00-03:00', eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode', eventStatus:'https://schema.org/EventScheduled', location:{ '@type':'Place', name:'Ballivián', address:'Ballivián 2329, Ciudad Autónoma de Buenos Aires' }, image:['/images/fugazzesions/og.jpg'], organizer:{ '@type':'Organization', name:'Fugazzesions' } };
     const s=document.createElement('script'); s.type='application/ld+json'; s.textContent=JSON.stringify(ld); document.head.appendChild(s);
-  </script>
+    // Carrusel de logos: infinito, auto cada 2s, 3 visibles (1 en mobile)
+(function(){
+  const track = document.getElementById('lcTrack');
+  if(!track) return;
+  const viewport = document.querySelector('.lc-viewport');
+  const EASE = '.55s cubic-bezier(.2,.7,.2,1)';
+  let autoplay = null, sliding = false;
+
+  const isMobile = () => window.matchMedia('(max-width:680px)').matches;
+  const visibleCount = () => isMobile() ? 1 : 3;
+  const stepPct = () => 100 / visibleCount();
+
+  function setCenter(){
+    const items = Array.from(track.children);
+    items.forEach(el=>el.classList.remove('is-center'));
+    const idx = visibleCount() === 3 ? 1 : 0; // centro visual
+    items[idx]?.classList.add('is-center');
+  }
+
+  function slide(dir){
+    if(sliding) return; sliding = true;
+    const STEP = stepPct();
+    track.style.transition = `transform ${EASE}`;
+    track.style.transform = `translateX(${dir===1 ? '-'+STEP : STEP}%)`;
+    track.addEventListener('transitionend', function onEnd(){
+      track.removeEventListener('transitionend', onEnd);
+      // reordenar DOM para efecto infinito
+      track.style.transition = 'none';
+      if(dir===1){ track.appendChild(track.firstElementChild); }
+      else { track.insertBefore(track.lastElementChild, track.firstElementChild); }
+      track.style.transform = 'translateX(0)';
+      // re-enable transición en el siguiente frame
+      requestAnimationFrame(()=>{
+        void track.offsetHeight; // reflow
+        track.style.transition = `transform ${EASE}`;
+        setCenter();
+        sliding = false;
+      });
+    }, {once:true});
+  }
+
+  function start(){ stop(); autoplay = setInterval(()=>slide(1), 2000); }
+  function stop(){ if(autoplay) clearInterval(autoplay); autoplay = null; }
+
+  // Init
+  setCenter(); start();
+  // Controles
+  document.querySelector('.lc-btn.next')?.addEventListener('click', ()=>{ slide(1); start(); });
+  document.querySelector('.lc-btn.prev')?.addEventListener('click', ()=>{ slide(-1); start(); });
+  // Pausa al hover (desktop)
+  viewport?.addEventListener('mouseenter', stop);
+  viewport?.addEventListener('mouseleave', start);
+  // Recalcular al redimensionar
+  window.addEventListener('resize', ()=>{ setCenter(); });
+})();
+    // Cards Carousel: infinito, auto 2s, 3 visibles (1 en mobile)
+  (function(){
+    const track = document.getElementById('ccTrack');
+    if(!track) return;
+    const viewport = track.closest('.cc-viewport');
+    const EASE = '.55s cubic-bezier(.2,.7,.2,1)';
+    let autoplay = null, sliding = false;
+    const isMobile = () => window.matchMedia('(max-width:680px)').matches;
+    const visibleCount = () => isMobile() ? 1 : (window.matchMedia('(max-width:860px)').matches ? 2 : 3);
+    const stepPct = () => 100 / visibleCount();
+
+    function setCenter(){
+      const items = Array.from(track.children);
+      items.forEach(el=>el.firstElementChild?.classList.remove('is-center'));
+      const idx = visibleCount() === 3 ? 1 : 0; // centro visual
+      (items[idx]?.firstElementChild)?.classList.add('is-center');
+    }
+    function slide(dir){
+      if(sliding) return; sliding = true;
+      const STEP = stepPct();
+      track.style.transition = `transform ${EASE}`;
+      track.style.transform = `translateX(${dir===1 ? '-'+STEP : STEP}%)`;
+      track.addEventListener('transitionend', function onEnd(){
+        track.removeEventListener('transitionend', onEnd);
+        track.style.transition = 'none';
+        if(dir===1){ track.appendChild(track.firstElementChild); }
+        else { track.insertBefore(track.lastElementChild, track.firstElementChild); }
+        track.style.transform = 'translateX(0)';
+        requestAnimationFrame(()=>{ void track.offsetHeight; track.style.transition = `transform ${EASE}`; setCenter(); sliding=false; });
+      }, {once:true});
+    }
+    function start(){ stop(); autoplay = setInterval(()=>slide(1), 2000); }
+    function stop(){ if(autoplay) clearInterval(autoplay); autoplay = null; }
+
+    setCenter(); start();
+    track.closest('.cards-carousel')?.querySelector('.cc-btn.next')?.addEventListener('click', ()=>{ slide(1); start(); });
+    track.closest('.cards-carousel')?.querySelector('.cc-btn.prev')?.addEventListener('click', ()=>{ slide(-1); start(); });
+    viewport?.addEventListener('mouseenter', stop);
+    viewport?.addEventListener('mouseleave', start);
+    window.addEventListener('resize', setCenter);
+  })();
+</script>
 </body>
+</html>
 </html>
