@@ -3,301 +3,328 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fugazzesions</title>
-  <meta name="description" content="Fugazzesions: eventos de patinaje + pizza. Próxima fecha: 7 de diciembre. Info, horarios, inscripción y próximos eventos." />
-  <meta property="og:title" content="Fugazzesions — 7 de Diciembre" />
-  <meta property="og:description" content="Pizza, Patín y Punto. Sumate a la próxima Fugazzesions." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/images/fugazzesions/og.jpg" />
-  <link rel="icon" href="/images/fugazzesions/favicon.png" />
+  <title>Fugazzesions — 7 de diciembre, Buenos Aires</title>
+  <meta name="description" content="Fugazzesions: patín + pizza en Buenos Aires. Próxima fecha 7 de diciembre. Info, agenda, inscripción y contacto." />
+  <link rel="icon" href="/images/fugazzesions/favicon.png"/>
+  <meta name="theme-color" content="#136c3a">
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Fugazzesions — 7 de diciembre, Buenos Aires"/>
+  <meta property="og:description" content="Pizza, Patín y Punto. Sumate a la próxima Fugazzesions."/>
+  <meta property="og:image" content="/images/fugazzesions/og.jpg"/>
   <style>
-    :root{
-      /* Paleta tipo landing app */
-      --bg:#0b0a10;            /* base oscura */
-      --vio:#8b5cf6;           /* violeta principal */
-      --pink:#ec4899;          /* acento rosa */
-      --text:#eef0f6;          /* texto claro */
-      --muted:#b7b9c7;
-      --card:#f6f7fb;          /* tarjeta clara */
-      --cardText:#0f1222;      /* texto en tarjeta clara */
-      --cardBorder:#e2e6f1;
-    }
+    /* =================== PALETA =================== */
+    :root{      --cream:#f6f3ea;     /* fondo claro principal */      --verde:#136c3a;     /* primario (texto fuerte y botones) */      --rojo:#c6252c;      /* acento damero / CTA secundario */      --text:#0c0d0b;      /* texto sobre crema */      --muted:#6a6f65;     /* texto secundario */      --card:#ffffff;      /* tarjetas */      --cardBorder:#e9e3d5;/* borde tarjetas */      --shadow:0 10px 28px rgba(0,0,0,.08);      /* tamaño de celda del damero (ajustable) */      --damero-cell: 22px;    }
 
+    /* =================== RESET & BASE =================== */
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; background:var(--bg); color:var(--text); font:16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; -webkit-font-smoothing:antialiased}
-    img{max-width:100%; display:block}
+    body{margin:0; background:var(--cream); color:var(--text); font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; -webkit-font-smoothing:antialiased}
+    img{max-width:100%; height:auto; display:block}
     a{color:inherit; text-decoration:none}
-    .container{width:min(1120px,92vw); margin:0 auto}
+    :target{scroll-margin-top:90px}
+    .container{width:min(1120px,92vw); margin-inline:auto}
+    .eyebrow{display:inline-block; font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:.78rem; color:var(--verde)}
+    h1,h2,h3{margin:0 0 .6rem; line-height:1.1}
+    h1{font-size:clamp(2.2rem,4.2vw,3.6rem)}
+    h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+    h3{font-size:clamp(1.1rem,1.8vw,1.25rem)}
+    p{margin:.25rem 0 .9rem}
 
-    /* Header */
-    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(10px); background:color-mix(in oklab, var(--bg) 80%, transparent); border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:.8rem 0}
-    .nav-links{display:flex; gap:1rem}
+    /* =================== BOTONES =================== */
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.15rem; border-radius:1rem; font-weight:800; border:1px solid #cbd3c7}
+    .btn.verde{background:var(--verde); color:#fff; border-color:var(--verde); box-shadow:0 6px 24px rgba(19,108,58,.22)}
+    .btn.rojo{background:var(--rojo); color:#fff; border-color:var(--rojo); box-shadow:0 6px 24px rgba(198,37,44,.22)}
+    .btn.ghost{background:#fff; color:var(--text); border-color:#dcd7c8}
+    .btn:focus-visible{outline:2px solid var(--verde); outline-offset:2px}
 
-    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.1rem; border-radius:1rem; font-weight:700; border:1px solid color-mix(in oklab, var(--vio) 60%, #2a3140); background:var(--vio); color:#070b12; box-shadow:0 8px 30px rgba(139,92,246,.22)}
-    .btn.ghost{background:transparent; color:var(--text); border-color:#2a3240}
-    .btn.gradient{background:linear-gradient(90deg, var(--vio), var(--pink)); color:#fff; border:none}
+    /* =================== NAV =================== */
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(8px); background:rgba(246,243,234,.75); border-bottom:1px solid #e7e1d3}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:.7rem 0}
+    .nav a.logo{display:flex; align-items:center; gap:.6rem; font-weight:900; color:var(--verde)}
+    .nav-links{display:flex; gap:1rem; align-items:center; font-weight:700}
+    .nav-links a{padding:.5rem .6rem; border-radius:.6rem}
+    .nav-links a.active{background:#e9efe8; color:var(--verde)}
 
-    /* HERO */
-    .hero{padding:7rem 0 5rem; background:
-      radial-gradient(100% 120% at 100% 0%, rgba(236,72,153,.18), transparent 40%),
-      radial-gradient(120% 120% at 0% 100%, rgba(139,92,246,.25), transparent 45%),
-      linear-gradient(180deg, rgba(255,255,255,.02), transparent);}
-    .hero .grid{display:grid; gap:2.6rem; grid-template-columns: 1.05fr .95fr; align-items:center}
-    .hero h1{font-size:clamp(2.4rem,4vw,3.8rem); line-height:1.02; margin:0 0 .8rem}
-    .lead{font-size:clamp(1rem,1.4vw,1.15rem); color:var(--muted)}
-    .cta-wrap{display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.4rem}
-    .grad{background:linear-gradient(90deg, var(--vio), var(--pink)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    /* =================== HERO =================== */
+    .hero{position:relative; isolation:isolate; padding:6.5rem 0 5rem; overflow:hidden}
+    .hero .grid{display:grid; gap:2.6rem; grid-template-columns:1.04fr .96fr; align-items:center}
+    .hero .lead{color:var(--muted)}
+    .hero .cta{display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.1rem}
 
-    /* Visual hero: logo central + logos de fondo */
-    .hero-visual{position:relative; display:grid; place-items:center; min-height:520px}
-    .deck{position:absolute; inset:0; pointer-events:none}
-    .bg-logo{
-      position:absolute; opacity:.82; filter: drop-shadow(0 10px 35px rgba(0,0,0,.35));
-      pointer-events:none; user-select:none;
-    }
-    .bg-logo.lg1{width:clamp(220px,32vw,420px); top:8%; left:-6%;  transform:rotate(-14deg)}
-    .bg-logo.lg2{width:clamp(240px,34vw,460px); right:-8%; bottom:6%; transform:rotate(12deg)}
-    .bg-logo.lg3{width:clamp(180px,26vw,360px); top:45%; left:10%; transform:rotate(0deg); opacity:.10}
-    @keyframes floaty{0%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-6px) rotate(calc(var(--rot,0deg)+.2deg))}100%{transform:translateY(0) rotate(var(--rot,0deg))}}
-    .bg-logo.lg1{--rot:-14deg; animation: floaty 9s ease-in-out infinite}
-    .bg-logo.lg2{--rot: 12deg; animation: floaty 11s ease-in-out infinite}
-    .bg-logo.lg3{--rot:  0deg; animation: floaty 13s ease-in-out infinite}
+    /* Cintas damero arriba/abajo del hero */
+    .hero::before,.hero::after{content:none; display:none;}
+    .hero::before{top:0; clip-path: polygon(0 0, 100% 18%, 100% 100%, 0 100%);}
+    .hero::after{bottom:-58px; transform:skewY(3deg)}
 
-    .logo-wrap{position:relative; width:min(460px, 85%); aspect-ratio:1/1; display:grid; place-items:center;}
-    .logo-wrap::before{content:""; position:absolute; inset:-10% -10% -20% -10%;
-      background: radial-gradient(50% 50% at 70% 30%, rgba(139,92,246,.45), transparent 60%),
-                  radial-gradient(50% 60% at 30% 70%, rgba(236,72,153,.35), transparent 60%);
-      filter: blur(40px); opacity:.7; z-index:-1}
-    .logo-wrap img{max-width:90%; height:auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,.55));}
+    /* Visual hero */
+    .ticket{background:#fff; border:1px solid #e7e1d3; border-radius:1.4rem; padding:1.2rem; box-shadow:var(--shadow)}
+    .ticket .row{display:grid; grid-template-columns:88px 1fr; gap:.4rem 1rem; align-items:center}
+    .ticket .thumb{width:88px; height:52px; border-radius:12px; overflow:hidden; background:#fff; border:1px solid #e7e1d3}
+    .ticket .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .badge{display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:.7rem; background:#e9efe8; color:var(--verde); font-weight:900}
+    .ticket{background:#fff; border:1px solid #e7e1d3; border-radius:1.4rem; padding:1.2rem; box-shadow:var(--shadow)}
+    .ticket .row{display:grid; grid-template-columns:88px 1fr; gap:.4rem 1rem; align-items:center}
+    .badge{display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .7rem; border-radius:.7rem; background:#e9efe8; color:var(--verde); font-weight:900}
 
-    @media (max-width:980px){ .hero .grid{grid-template-columns:1fr} .logo-wrap{width:min(420px,80%)} .bg-logo{display:none} }
+    /* Secciones generales */
+    section{padding:3.8rem 0}
+    .section-title{margin-bottom:1rem}
 
-    /* Fondo y colores SOLO después del hero */
-    .after-hero{
-    background:
-        radial-gradient(120% 120% at 100% 0%, rgba(139,92,246,.18), transparent 40%),
-        radial-gradient(120% 120% at 0% 100%, rgba(236,72,153,.14), transparent 45%),
-        #0c0a14;
-    }
+    /* Presentan */
+    .section-presentan{position:relative; isolation:isolate; background:var(--cream); color:var(--verde); overflow:hidden; border-top:1px solid #e7e1d3; border-bottom:1px solid #e7e1d3}
+    .section-presentan::before,.section-presentan::after{content:none; display:none;}
+    .section-presentan::before{top:0; clip-path: polygon(0 0, 100% 14%, 100% 100%, 0 100%);}
+    .section-presentan::after{bottom:-46px; transform:skewY(3deg)}
+    .presentan-wrap{position:relative; z-index:1; text-align:center}
+    .presentan-grid{display:grid; gap:1rem; align-items:center; justify-items:center; grid-template-columns:repeat(2,minmax(0,1fr))}
+    .sponsor{background:var(--card); border:1px solid var(--cardBorder); border-radius:.9rem; padding:1rem 1.2rem; width:100%; max-width:320px; aspect-ratio:16/9; display:grid; place-items:center; box-shadow:var(--shadow)}
+    .sponsor img{max-height:56px; max-width:80%}
 
-    /* Tarjetas claras sobre ese fondo */
-    .after-hero .feature-dark,
-    .after-hero .card-dark,
-    .after-hero .next-card{
-    background: var(--card);
-    color: var(--cardText);
-    border: 1px solid var(--cardBorder);
-    box-shadow: 0 10px 30px rgba(0,0,0,.15);
-    }
+    /* Qué vas a encontrar */
+    .features{display:grid; gap:1rem; grid-template-columns:repeat(3,minmax(0,1fr))}
+    .feature{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow)}
 
-    /* Texto afinado en esa zona */
-    .after-hero h2{ color:#ffffff; }
-    .after-hero .lead{ color:#ffffff; }
-    .after-hero .subtle{ color:#ffffff; }
+    /* Agenda */
+    .agenda-grid{display:grid; gap:1rem; grid-template-columns:.9fr 1.1fr}
+    .agenda-card{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow)}
+    .agenda-card .row{display:flex; justify-content:space-between; border-top:1px dashed #e7e1d3; padding:.55rem 0}
+    .agenda-card .row:first-child{border-top:none}
 
-    /* Botones ghost sobre fondo claro */
-    .after-hero .btn.ghost{ border-color:#cfd6ea; color:#0e1020; }
+    /* FAQ */
+    .faq-grid{display:grid; gap:1rem; grid-template-columns:repeat(3,minmax(0,1fr))}
+    .faq{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow)}
 
-
-    /* Secciones base */
-    section{padding:3.8rem 0; border-top:1px solid rgb(18, 18, 18)}
-    h2{font-size: clamp(1.6rem, 2.4vw, 2.1rem); margin:0 0 .8rem}
-
-    /* Tarjetas oscuras (encima del fondo oscuro) */
-    .feature-dark{background:#11101b; border:1px solid rgba(255,255,255,.08); border-radius:1.1rem; padding:1rem; box-shadow:0 6px 24px rgba(0,0,0,.25)}
-    .features{display:grid; gap:1rem; grid-template-columns: repeat(3,minmax(0,1fr))}
-
-    /* BLOQUE Proximo evento */
-    .next-card{background:#0f0e1b; border:1px solid rgba(255,255,255,.08); border-radius:1.2rem; padding:1rem; box-shadow:0 8px 30px rgba(0,0,0,.25)}
-    .next-row{display:grid; gap:1rem; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start}
-    .next-row .label{display:block; color:var(--muted); font-size:.9rem}
-    .next-row .value{font-weight:800; font-size:1.1rem}
-    .next-cta{display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1rem}
-
-    /* Agenda / cards oscuras */
-    .card-dark{background:#11101b; color:var(--text); border-radius:1rem; padding:1rem; border:1px solid rgba(255,255,255,.08)}
-    .card-dark .row{display:flex; justify-content:space-between; border-top:1px dashed rgba(255,255,255,.12); padding:.55rem 0}
-    .card-dark .row:first-child{border-top:none}
-
-    /* Próximos eventos */
-    .events{display:grid; gap:1rem; grid-template-columns: repeat(3,minmax(0,1fr))}
-    .event{background:#11101b; border:1px solid rgba(255,255,255,.08); border-radius:1rem; padding:1rem}
+    /* Contacto */
+    .contact{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow)}
 
     /* Footer */
-    footer{padding:2.5rem 0 4rem; color:#cececf}
-    footer .grid{display:grid; grid-template-columns: 1fr auto; align-items:center}
+    footer{padding:2.2rem 0 3rem; color:#4d564b}
 
     /* Responsive */
-    @media (max-width:980px){ .features{grid-template-columns:1fr 1fr} .events{grid-template-columns:1fr 1fr} }
-    @media (max-width:560px){ .features,.events{grid-template-columns:1fr} }
-  </style>
+    @media (max-width:980px){
+      .hero .grid{grid-template-columns:1fr}
+      .presentan-grid{grid-template-columns:1fr 1fr}
+      .features{grid-template-columns:1fr 1fr}
+      .faq-grid{grid-template-columns:1fr 1fr}
+      .agenda-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      .presentan-grid,.features,.faq-grid{grid-template-columns:1fr}
+    }
+
+    /* Activo por sección (nav) */
+    .section-observed{scroll-margin-top:110px}
+  
+  /* === Forzar fondo único crema en toda la página (preview unificada) === */
+  html, body { background: var(--cream) !important; color: var(--text); }
+  main, section, header, footer { background: transparent !important; }
+  /* limpiar posibles bandas decorativas y variantes oscuras */
+  .hero::before, .hero::after,
+  .section-presentan::before, .section-presentan::after { content: none !important; }
+  /* normalizar tarjetas a claras */
+  .feature-dark, .card-dark, .event, .next-card,
+  .feature, .faq, .contact, .agenda-card, .sponsor, .ticket { 
+    background: var(--card) !important;
+    color: var(--text) !important;
+    border: 1px solid var(--cardBorder) !important;
+    box-shadow: 0 10px 28px rgba(0,0,0,.08) !important;
+  }
+
+  /* —— Superficies sin tarjeta —— */
+  .surface-none > * { background: transparent; border: 0; box-shadow: none; }
+  /* —— Divisor sutil por filas —— */
+  .rows { display:grid; gap:.2rem; }
+  .row-line { padding:.8rem 0; border-bottom:1px solid #e9e3d5; }
+  .row-line:last-child { border-bottom:0; }
+  .row-line strong { display:block; font-weight:800; }
+  /* —— Timeline (Agenda) —— */
+  .timeline { position:relative; margin:0; padding:0 0 0 1.25rem; list-style:none; }
+  .timeline::before { content:""; position:absolute; left:.38rem; top:.2rem; bottom:.2rem; width:2px; background:#e3ddce; }
+  .timeline li { position:relative; margin:0 0 1rem; }
+  .timeline li::before { content:""; position:absolute; left:-.04rem; top:.25rem; width:.7rem; height:.7rem; border-radius:50%; background:var(--verde); box-shadow:0 0 0 3px #f6f3ea; }
+  .time { font-weight:800; color:var(--verde); margin-left:.25rem; }
+  /* —— FAQ con details/summary —— */
+  .faq-plain details { border-bottom:1px solid #e9e3d5; padding:.9rem 0; }
+  .faq-plain details:last-child { border-bottom:0; }
+  .faq-plain summary { cursor:pointer; font-weight:800; list-style:none; }
+  .faq-plain summary::-webkit-details-marker{display:none}
+  .faq-plain details[open] summary { color:var(--verde); }
+  /* —— Logos sin caja —— */
+  .sponsors-plain { display:grid; gap:1.2rem; align-items:center; justify-items:center; grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .sponsors-plain img { max-height:56px; max-width:80%; filter:contrast(1.05); }
+  @media (max-width:980px){ .sponsors-plain{grid-template-columns:1fr 1fr} }
+  @media (max-width:560px){ .sponsors-plain{grid-template-columns:1fr} }
+  /* —— Utilidad de título y subtítulo —— */
+  .section-title { margin:0 0 .3rem; }
+  .section-sub { color:var(--muted); margin:0 0 1rem; }
+</style>
 </head>
 <body>
+  <!-- =================== NAV =================== -->
   <header>
     <div class="container nav">
-      <a class="logo" href="#home" aria-label="Inicio" style="gap:.6rem">
-        <!-- logo header -->
-        <img src="loguitp.png" alt="Fugazzesions" style="height:28px; width:auto"/>
+      <a class="logo" href="#home" aria-label="Inicio">
+        <img src="pizza.png" alt="" style="width:28px;height:28px"> Fugazzesions
       </a>
       <nav class="nav-links" aria-label="Principal">
-        <a href="#evento">Evento</a>
-        <a href="#proximo">Próximo</a>
+        <a href="#home">Inicio</a>
+        <a href="#presentan">Presentan</a>
+        <a href="#encontrar">Encontrarás</a>
         <a href="#agenda">Agenda</a>
-        <a href="#inscripcion">Inscripción</a>
         <a href="#faq">FAQs</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
 
-  <main id="home">
-    <!-- HERO -->
-    <section id="evento" class="hero">
+  <main id="home" class="section-observed">
+    <!-- =================== HERO =================== -->
+    <section class="hero" aria-labelledby="hero-h">
       <div class="container grid">
         <div>
-          <div style="display:flex; gap:.5rem; flex-wrap:wrap">
-            <span class="btn" style="background:var(--pink); color:#160410; border:none; padding:.45rem .75rem; border-radius:.8rem; font-weight:800">7 de Diciembre</span>
-            <span class="btn" style="background:var(--vio); color:#110b20; border:none; padding:.45rem .75rem; border-radius:.8rem; font-weight:800">¡Se patina!</span>
-          </div>
-          <h1>Una <span class="grad">manera de anunciar</span><br/>tu próxima sesión.</h1>
-          <p class="lead">Fugazzesions — Patín, pizza y punto. ¡Reservá tu lugar!</p>
-          <div class="cta-wrap">
-            <a class="btn gradient" href="#inscripcion">Reservar lugar</a>
+          <span class="eyebrow">Domingo 7 de diciembre — CABA</span>
+          <h1 id="hero-h">Patín, pizza y punto. <span style="color:var(--verde)">Fugazzesions</span></h1>
+          <p class="lead">Una sesión abierta, buena música y porciones generosas. Apto todos los niveles — te esperamos.</p>
+          <div class="cta">
+            <a class="btn verde" href="#inscripcion">Reservar lugar</a>
             <a class="btn ghost" href="#agenda">Ver agenda</a>
+            <a class="btn rojo" id="addCal" href="#">.ics</a>
           </div>
-        </div>
-        <aside class="hero-visual">
-          <div class="deck">
-            <img class="bg-logo lg1" src="pizzamasfuga.png" alt="">
-        </aside>
-      </div>
-    </section>
-
-    <div class="after-hero">
-    <!-- PRÓXIMO EVENTO (desde acá aplicamos tema alterno) -->
-    <section id="proximo" class="alt-theme">
-      <div class="container">
-        <h2>Próximo evento</h2>
-        <div class="next-card">
-          <div class="next-row">
-            <div><span class="label">Fecha</span><div class="value">Dom 7/12</div></div>
-            <div><span class="label">Horario</span><div class="value">12:00–23:00</div></div>
-            <div><span class="label">Lugar</span><div class="value">Ballivián 2329, CABA</div></div>
-          </div>
-          <div class="next-cta">
-            <a class="btn ghost" href="#inscripcion">Inscribirme</a>
-            <a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ballivi%C3%A1n+2329,+CABA">Cómo llegar</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ¿QUÉ VAS A ENCONTRAR? -->
-    <section class="alt-theme">
-      <div class="container">
-        <h2>¿Qué vas a encontrar?</h2>
-        <p class="lead">Patinaje libre, buena música y porciones generosas. Si es tu primera vez, vení igual: hay espacio para todos los niveles.</p>
-        <div class="features">
-          <article class="feature-dark"><h3>Espacio seguro</h3><p>Ambiente comunitario. Respeto de normas y uso de protecciones recomendado.</p></article>
-          <article class="feature-dark"><h3>Desafíos opcionales</h3><p>Mini retos técnicos con premios comestibles. Te anotás si querés.</p></article>
-          <article class="feature-dark"><h3>Pizza & chill</h3><p>Pausa para reponer energía. Opciones veg.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <!-- AGENDA -->
-    <section id="agenda" class="alt-theme">
-      <div class="container" style="display:grid; gap:1rem; grid-template-columns:.9fr 1.1fr">
-        <div>
-          <h2>Agenda</h2>
-          <div class="card-dark">
-            <h3>Domingo 7/12</h3>
-            <div class="row"><span>Acreditación</span><span>12:00</span></div>
-            <div class="row"><span>Warm-up libre</span><span>12:30</span></div>
-            <div class="row"><span>Mini desafíos</span><span>16:00</span></div>
-            <div class="row"><span>Pizza break</span><span>19:00</span></div>
-            <div class="row"><span>Jam colectiva</span><span>20:00</span></div>
-            <div class="row"><span>Cierre + foto</span><span>23:00</span></div>
+          <div style="display:flex; gap:1rem; margin-top:1rem; align-items:center">
+            <span class="badge" aria-label="Ubicación">📍 Ballivián 2329</span>
+            <span class="badge" aria-label="Horario">🕒 12:00–23:00</span>
           </div>
         </div>
         <aside>
-          <h2>Ubicación</h2>
-          <div class="feature-dark">
-            <p><strong>Sede:</strong> Fugazzesions — Ballivián</p>
-            <p><strong>Dirección:</strong> Ballivián 2329, Ciudad Autónoma de Buenos Aires</p>
-            <p><a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ballivi%C3%A1n+2329,+CABA">Ver mapa</a></p>
-          </div>
+          <img src="pizza.png" alt="Pizza Fugazzesions">
         </aside>
       </div>
     </section>
 
-    <!-- INSCRIPCIÓN (modo temporal sin Google Forms) -->
-    <section id="inscripcion" class="alt-theme">
-      <div class="container">
-        <h2>Reserva tu lugar</h2>
-        <p class="lead" style="color:#41465a">Por ahora lo hacemos por DM o email. Copiá el mensaje y enviánoslo.</p>
+    <!-- =================== PRESENTAN =================== -->
+    <section id="presentan" class="surface-none" aria-labelledby="presentan-h">
+  <div class="container">
+    <span class="eyebrow">Presentan</span>
+    <h2 id="presentan-h" class="section-title">Marcas y espacios que hacen posible la sesión</h2>
+    <div class="sponsors-plain">
+      <img src="pnb\plano.png" alt="Plano">
+      <img src="pnb\majorani.png" alt="Majorani">
+      <img src="pnb\sauzal.png" alt="Sauzal">
+      <img src="pnb\samana.png" alt="Samana hábitat cultural">
+      <img src="pnb\hazzard.png" alt="HBK">
+      <img src="pnb\coffe.png" alt="Drift cars & coffee">
+      <img src="pnb\omnibus.png" alt="Omnibus">
+    </div>
+  </div>
+</section>
 
-        <div class="feature-dark" style="display:grid; gap:1rem; grid-template-columns:1.1fr .9fr">
-          <div>
-            <h3 style="margin:.2rem 0 .6rem">Mensaje rápido</h3>
-            <div id="msgBox" style="background:var(--card); color:var(--cardText); border:1px solid var(--cardBorder); border-radius:.8rem; padding:.8rem">
-              Hola! Quiero reservar 1 lugar para <strong>Fugazzesions 7/12</strong>.<br/>
-              Nombre: ________<br/>
-              Instagram: @________<br/>
-              ¿Pizza vegana?: Sí / No
-            </div>
-            <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.7rem">
-              <button class="btn gradient" id="copyMsg">Copiar mensaje</button>
-              <a class="btn" target="_blank" rel="noopener" href="https://instagram.com/fugazzesions">Enviar por Instagram</a>
-              <a class="btn ghost" href="mailto:hola@fugazzesions.com?subject=Reserva%20Fugazzesions%207%2F12&body=Hola%21%20Quiero%20reservar%201%20lugar%20para%20Fugazzesions%207%2F12.%0ANombre%3A%20______%0AInstagram%3A%20%40______%0A%C2%BFPizza%20vegana%3F%3A%20Si%20%2F%20No">Enviar por email</a>
-            </div>
+    <!-- =================== QUÉ VAS A ENCONTRAR =================== -->
+    <section id="encontrar" class="surface-none" aria-labelledby="enc-h">
+  <div class="container">
+    <span class="eyebrow">Para todos los niveles</span>
+    <h2 id="enc-h" class="section-title">¿Qué vas a encontrar?</h2>
+    <p class="section-sub">Ambiente seguro, retos opcionales y buena comida.</p>
+    <div class="rows">
+      <div class="row-line">
+        <strong>Espacio seguro</strong>
+        <p>Ambiente comunitario. Respeto de normas y protecciones recomendado.</p>
+      </div>
+      <div class="row-line">
+        <strong>Desafíos opcionales</strong>
+        <p>Mini-retos técnicos con premios comestibles. Te anotás si querés.</p>
+      </div>
+      <div class="row-line">
+        <strong>Pizza & chill</strong>
+        <p>Pausa para reponer energía. Opciones veg.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- =================== AGENDA =================== -->
+    <section id="agenda" class="surface-none" aria-labelledby="ag-h">
+  <div class="container">
+    <span class="eyebrow">Domingo 7/12</span>
+    <h2 id="ag-h" class="section-title">Agenda</h2>
+    <ol class="timeline">
+      <li><span class="time">12:00</span> Acreditación</li>
+      <li><span class="time">12:30</span> Warm‑up libre</li>
+      <li><span class="time">16:00</span> Mini desafíos</li>
+      <li><span class="time">19:00</span> Pizza break</li>
+      <li><span class="time">20:00</span> Jam colectiva</li>
+      <li><span class="time">23:00</span> Cierre + foto</li>
+    </ol>
+  </div>
+</section>
+
+    <!-- =================== INSCRIPCIÓN (lite) =================== -->
+    <section id="inscripcion" class="section-observed" aria-labelledby="ins-h">
+      <div class="container">
+        <span class="eyebrow">Cupos limitados</span>
+        <h2 id="ins-h" class="section-title">Reserva tu lugar</h2>
+        <div class="contact">
+          <p style="margin-top:0">Por ahora lo hacemos por DM o email. Copiá el mensaje y enviánoslo.</p>
+          <div id="msgBox" style="background:#fff; border:1px solid var(--cardBorder); border-radius:.8rem; padding:.8rem">
+            Hola! Quiero reservar 1 lugar para <strong>Fugazzesions 7/12</strong>.<br/>
+            Nombre: ________<br/>
+            Instagram: @________<br/>
+            ¿Pizza vegana?: Sí / No
+          </div>
+          <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.7rem">
+            <button class="btn verde" id="copyMsg">Copiar mensaje</button>
+            <a class="btn ghost" target="_blank" rel="noopener" href="https://instagram.com/fugazzesions">Enviar por Instagram</a>
+            <a class="btn ghost" href="mailto:hola@fugazzesions.com?subject=Reserva%20Fugazzesions%207%2F12&body=Hola%21%20Quiero%20reservar%201%20lugar%20para%20Fugazzesions%207%2F12.%0ANombre%3A%20______%0AInstagram%3A%20%40______%0A%C2%BFPizza%20vegana%3F%3A%20Si%20%2F%20No">Enviar por email</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="alt-theme">
-      <div class="container">
-        <h2>Preguntas frecuentes</h2>
-        <div class="features" style="grid-template-columns:1fr 1fr 1fr">
-          <article class="feature-dark"><h3>¿Nivel?</h3><p>Todos los niveles. Cuidamos la convivencia en pista.</p></article>
-          <article class="feature-dark"><h3>¿Clima?</h3><p>Si llueve y la sede es a cielo abierto, reprogramamos. Avisamos por Instagram.</p></article>
-          <article class="feature-dark"><h3>¿Qué llevo?</h3><p>Agua, protecciones y muchas ganas. Hay pizza.</p></article>
-        </div>
-      </div>
-    </section>
+    <!-- =================== FAQ =================== -->
+    <section id="faq" class="surface-none faq-plain" aria-labelledby="faq-h">
+  <div class="container">
+    <span class="eyebrow">Dudas comunes</span>
+    <h2 id="faq-h" class="section-title">Preguntas frecuentes</h2>
+    <details>
+      <summary>¿Nivel?</summary>
+      <p>Todos los niveles. Cuidamos la convivencia en pista.</p>
+    </details>
+    <details>
+      <summary>¿Clima?</summary>
+      <p>Si llueve y la sede es a cielo abierto, reprogramamos y avisamos por Instagram.</p>
+    </details>
+    <details>
+      <summary>¿Qué llevo?</summary>
+      <p>Agua, protecciones y muchas ganas. Hay pizza.</p>
+    </details>
+  </div>
+</section>
 
-    <!-- CONTACTO -->
-    <section id="contacto" class="alt-theme">
-      <div class="container">
-        <h2>Contacto</h2>
-        <p class="lead" style="color:#41465a">Seguinos en Instagram para enterarte primero.</p>
-        <div style="display:flex; gap:.8rem; flex-wrap:wrap">
-          <a class="btn gradient" target="_blank" rel="noopener" href="https://instagram.com/fugazzesions">@fugazzesions</a>
-          <a class="btn ghost" href="mailto:hola@fugazzesions.com">hola@fugazzesions.com</a>
-        </div>
-      </div>
-    </section>
-
-    </div>
-
+    <!-- =================== CONTACTO =================== -->
+    <section id="contacto" class="surface-none" aria-labelledby="ct-h">
+  <div class="container">
+    <span class="eyebrow">Contacto</span>
+    <h2 id="ct-h" class="section-title">Hablemos</h2>
+    <p class="section-sub">Seguinos en Instagram para enterarte primero.</p>
+    <p>
+      <a class="btn verde" target="_blank" rel="noopener" href="https://instagram.com/fugazzesions">@fugazzesions</a>
+      <a class="btn ghost" href="mailto:hola@fugazzesions.com">hola@fugazzesions.com</a>
+    </p>
+  </div>
+</section>
   </main>
 
   <footer>
-    <div class="container grid">
+    <div class="container" style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap">
       <small>© <span id="y"></span> Fugazzesions. Pizza, Patín y Punto.</small>
-      <small>Hecho con HTML/CSS. Hero estilo app + tema alterno violeta.</small>
+      <small>One‑page crema/verde/rojo con damero.</small>
     </div>
   </footer>
 
   <script>
-    // Año dinámico
+    // Año
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Scroll suave
+    // Scroll suave y active link
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', e=>{
         const id=a.getAttribute('href'); const el=document.querySelector(id);
@@ -305,48 +332,39 @@
       });
     });
 
-    // Copiar mensaje
-    document.getElementById('copyMsg')?.addEventListener('click', ()=>{
-      const tmp=document.createElement('textarea');
-      tmp.value = document.getElementById('msgBox').innerText.replace(/\n\s*\n/g,"\n");
-      document.body.appendChild(tmp); tmp.select(); document.execCommand('copy'); document.body.removeChild(tmp);
-      alert('Mensaje copiado. Pegalo en Instagram o email.');
+    const links=[...document.querySelectorAll('header .nav-links a')];
+    const sections=[...document.querySelectorAll('.section-observed')];
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          const id = '#' + en.target.id;
+          links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')===id));
+        }
+      })
+    },{root:null, threshold:.4});
+    sections.forEach(s=>io.observe(s));
+
+    // Copiar mensaje (Clipboard API + fallback)
+    document.getElementById('copyMsg')?.addEventListener('click', async ()=>{
+      const text=document.getElementById('msgBox').innerText.replace(/\n\s*\n/g,'\n');
+      try{ await navigator.clipboard.writeText(text); alert('Mensaje copiado.'); }
+      catch(e){ const t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); alert('Mensaje copiado.'); }
     });
 
-    // .ics (12:00–23:00, hora Buenos Aires)
+    // .ics (12:00–23:00, hora Buenos Aires) — botón #addCal y #addCal2
     function downloadICS(){
-      const ics = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Fugazzesions//Event//ES
-BEGIN:VEVENT
-UID:${Date.now()}@fugazzesions
-DTSTAMP:${new Date().toISOString().replace(/[-:]/g,'').replace(/\..+/,'')}Z
-SUMMARY:Fugazzesions
-DESCRIPTION:Pizza, Patín y Punto.
-DTSTART;TZID=America/Argentina/Buenos_Aires:20251207T120000
-DTEND;TZID=America/Argentina/Buenos_Aires:20251207T230000
-LOCATION:Ballivián 2329, Ciudad Autónoma de Buenos Aires
-END:VEVENT
-END:VCALENDAR`;
-      const blob = new Blob([ics], {type:'text/calendar'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'fugazzesions-2025-12-07.ics'; a.click();
-      setTimeout(()=>URL.revokeObjectURL(url), 5000);
+      const ics=`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Fugazzesions//Event//ES\nBEGIN:VEVENT\nUID:${Date.now()}@fugazzesions\nDTSTAMP:${new Date().toISOString().replace(/[-:]/g,'').replace(/\..+/,'')}Z\nSUMMARY:Fugazzesions\nDESCRIPTION:Pizza, Patín y Punto.\nDTSTART:20251207T120000-0300\nDTEND:20251207T230000-0300\nLOCATION:Ballivián 2329, Ciudad Autónoma de Buenos Aires\nEND:VEVENT\nEND:VCALENDAR`;
+      const blob=new Blob([ics],{type:'text/calendar'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='fugazzesions-2025-12-07.ics'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),5000);
     }
-    document.getElementById('addCal2')?.addEventListener('click', downloadICS);
+    document.getElementById('addCal')?.addEventListener('click', (e)=>{e.preventDefault(); downloadICS();});
+    document.getElementById('addCal2')?.addEventListener('click', (e)=>{e.preventDefault(); downloadICS();});
 
     // JSON-LD SEO
-    const ld = {
-      '@context':'https://schema.org', '@type':'Event',
-      name:'Fugazzesions', description:'Pizza, Patín y Punto.',
-      startDate:'2025-12-07T12:00:00-03:00', endDate:'2025-12-07T23:00:00-03:00',
-      eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode',
-      eventStatus:'https://schema.org/EventScheduled',
-      location:{ '@type':'Place', name:'Ballivián', address:'Ballivián 2329, Ciudad Autónoma de Buenos Aires' },
-      image:['/images/fugazzesions/og.jpg'], organizer:{ '@type':'Organization', name:'Fugazzesions' }
-    };
-    const s = document.createElement('script'); s.type='application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+    const ld={ '@context':'https://schema.org','@type':'Event', name:'Fugazzesions', description:'Pizza, Patín y Punto.', startDate:'2025-12-07T12:00:00-03:00', endDate:'2025-12-07T23:00:00-03:00', eventAttendanceMode:'https://schema.org/OfflineEventAttendanceMode', eventStatus:'https://schema.org/EventScheduled', location:{ '@type':'Place', name:'Ballivián', address:'Ballivián 2329, Ciudad Autónoma de Buenos Aires' }, image:['/images/fugazzesions/og.jpg'], organizer:{ '@type':'Organization', name:'Fugazzesions' } };
+    const s=document.createElement('script'); s.type='application/ld+json'; s.textContent=JSON.stringify(ld); document.head.appendChild(s);
   </script>
 </body>
 </html>
