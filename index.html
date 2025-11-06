@@ -44,6 +44,13 @@
     .nav-links{display:flex; gap:1rem; align-items:center; font-weight:700}
     .nav-links a{padding:.5rem .6rem; border-radius:.6rem}
     .nav-links a.active{background:#e9efe8; color:var(--verde)}
+    .menu-btn{
+      display:none; align-items:center; gap:.4rem;
+      padding:.55rem .8rem; border-radius:.6rem;
+      border:1px solid #dcd7c8; background:#fff;
+      font-weight:800; color:var(--text);
+      box-shadow:0 4px 16px rgba(0,0,0,.06);
+    }
 
     /* =================== HERO =================== */
     .hero{position:relative; isolation:isolate; padding:6.5rem 0 5rem; overflow:hidden}
@@ -119,6 +126,24 @@
     }
     @media (max-width:560px){
       .presentan-grid,.features,.faq-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:920px){
+      header .nav{position:relative; gap:.6rem}
+      header .menu-btn{display:inline-flex}
+      header .nav-links{
+        position:absolute; top:100%; left:0; right:0;
+        display:none; flex-direction:column; gap:.4rem; padding:.6rem;
+        background:rgba(246,243,234,.96);
+        border-bottom:1px solid #e7e1d3;
+        box-shadow:0 10px 28px rgba(0,0,0,.08);
+      }
+      header.nav-open .nav-links{display:flex}
+      header .nav-links a{background:#fff; border:1px solid #e7e1d3; border-radius:.6rem}
+    }
+
+    /* Carrusel de logos: 1 por vista en mobile */
+    @media (max-width:900px){
+      .lc-item{ flex:0 0 100% !important; }
     }
 
     /* Activo por sección (nav) */
@@ -245,6 +270,26 @@
   .loc-card .btn-row{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.6rem}
   @media (max-width:980px){ .agenda-wrap{grid-template-columns:1fr} }
 
+  /* Nav móvil: links sin fondo */
+  @media (max-width:920px){
+    header .nav-links a{
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      padding: .6rem .8rem;   /* conserva área táctil */
+      border-radius: 0;
+    }
+    /* estado activo/enfocado: solo color de texto */
+    header .nav-links a.active,
+    header .nav-links a:focus-visible{
+      background: transparent !important;
+      color: var(--verde);
+      outline: none;
+      text-decoration: underline; /* opcional, podés quitarlo */
+      text-underline-offset: 2px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -254,10 +299,11 @@
       <a class="logo" href="#home" aria-label="Inicio">
         <img src="cajapizza.jpg" alt="" style="width:28px;height:28px"> Fugazzesions
       </a>
-      <nav class="nav-links" aria-label="Principal">
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mainNav">Menú</button>
+      <nav id="mainNav" class="nav-links" aria-label="Principal">
         <a href="#home">Inicio</a>
-        <a href="#presentan">Presentan</a>
-        <a href="#encontrar">Encontrarás</a>
+        <a href="#presentan">Marcas</a>
+        <a href="#encontrar">Contenido</a>
         <a href="#agenda">Agenda</a>
         <a href="#faq">FAQs</a>
         <a href="#contacto">Contacto</a>
@@ -506,7 +552,7 @@
   const EASE = '.55s cubic-bezier(.2,.7,.2,1)';
   let autoplay = null, sliding = false;
 
-  const isMobile = () => window.matchMedia('(max-width:680px)').matches;
+  const isMobile = () => window.matchMedia('(max-width:900px)').matches;
   const visibleCount = () => isMobile() ? 1 : 3;
   const stepPct = () => 100 / visibleCount();
 
@@ -594,6 +640,27 @@
     viewport?.addEventListener('mouseleave', start);
     window.addEventListener('resize', setCenter);
   })();
+  // Menú móvil
+(function(){
+  const headerEl = document.querySelector('header');
+  const btn = document.querySelector('.menu-btn');
+  const nav = document.getElementById('mainNav');
+  if(!btn || !nav) return;
+
+  btn.addEventListener('click', ()=>{
+    const open = headerEl.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', open);
+  });
+
+  // Cerrar al elegir una sección
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      headerEl.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+
 </script>
 </body>
 </html>
