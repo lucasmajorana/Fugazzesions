@@ -53,7 +53,7 @@
     }
 
     /* =================== HERO =================== */
-    .hero{position:relative; isolation:isolate; padding:6.5rem 0 0; overflow:hidden}
+    .hero{position:relative; isolation:isolate; padding:3rem 0 0; overflow:hidden}
     .hero .grid{display:grid; gap:2.6rem; grid-template-columns:1.04fr .96fr; align-items:center}
     .hero .lead{color:var(--muted)}
     .hero .cta{display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.1rem}
@@ -110,6 +110,64 @@
     .agenda-card{background:var(--card); border:1px solid var(--cardBorder); border-radius:1rem; padding:1rem; box-shadow:var(--shadow)}
     .agenda-card .row{display:flex; justify-content:space-between; border-top:1px dashed #e7e1d3; padding:.55rem 0}
     .agenda-card .row:first-child{border-top:none}
+
+    /* === Agenda partida en dos, con línea al centro === */
+#agenda .agenda-wrap{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* dos mitades iguales */
+  column-gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+}
+
+/* Línea divisoria */
+#agenda .agenda-wrap::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0; left:50%;
+  width:1px;
+  background:#e3ddce;
+}
+
+/* Columna izquierda (horarios): “empuja” hacia la línea */
+#agenda .agenda-wrap > div{
+  max-width: 560px;
+  padding-right: clamp(8px, 2vw, 24px);
+}
+
+/* Columna derecha (ubicación): “empuja” hacia la línea */
+#agenda .agenda-wrap > aside{
+  max-width: 560px;
+  margin-right: auto;         /* se centra hacia la línea */
+  padding-left: clamp(8px, 2vw, 24px);
+}
+
+/* Quitar recuadros y sombras */
+#agenda .loc-card{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Ajustes de timeline para que luzca limpio sobre fondo */
+#agenda .agenda-timeline{ padding-left: 1.4rem; }  /* ya lo tenías */
+#agenda .agenda-timeline::before{ background:#e3ddce; } /* línea leve */
+
+/* Responsivo: una sola columna y sin línea */
+@media (max-width: 880px){
+  #agenda .agenda-wrap{
+    grid-template-columns: 1fr;
+  }
+  #agenda .agenda-wrap::before{ display:none; }
+  #agenda .agenda-wrap > div,
+  #agenda .agenda-wrap > aside{
+    max-width: unset;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 
     /* FAQ */
     .faq-grid{display:grid; gap:1rem; grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -339,7 +397,7 @@
           </div>
           <div style="display:flex; gap:1rem; margin-top:1rem; align-items:center">
             <span class="badge" aria-label="Ubicación">📍 Ballivián 2329</span>
-            <span class="badge" aria-label="Horario">🕒 12:00–23:00</span>
+            <span class="badge" aria-label="Horario">🕒 14:00–00:00</span>
           </div>
         </div>
         <aside>
