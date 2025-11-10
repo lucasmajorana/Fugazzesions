@@ -53,10 +53,24 @@
     }
 
     /* =================== HERO =================== */
-    .hero{position:relative; isolation:isolate; padding:6.5rem 0 1rem; overflow:hidden}
+    .hero{position:relative; isolation:isolate; padding:6.5rem 0 0; overflow:hidden}
     .hero .grid{display:grid; gap:2.6rem; grid-template-columns:1.04fr .96fr; align-items:center}
     .hero .lead{color:var(--muted)}
     .hero .cta{display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.1rem}
+
+    /* ——— Pizza flotante (alrededor de su centro) ——— */
+    .hero aside { position: relative; }
+    .float-pizza{
+      will-change: transform;
+      transform-origin: 50% 50%;
+      transition: transform .3s ease-out;
+      /* un poco de sombra para “separarla” del fondo, opcional */
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.12));
+    }
+    @media (prefers-reduced-motion: reduce){
+      .float-pizza{ transition: none !important; }
+    }
+
 
     /* Cintas damero arriba/abajo del hero */
     .hero::before,.hero::after{content:none; display:none;}
@@ -660,6 +674,79 @@
     });
   });
 })();
+
+  // ===== Pizza "flotando" aleatoriamente (sin cambiar la ruta del src) =====
+  (function(){
+    // Selecciona el logo del hero sin tocar su ruta
+    const pizza = document.querySelector('.hero aside img[src$="pizza.png"]');
+    if(!pizza) return;
+
+    // Respeta usuarios con movimiento reducido
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+
+    pizza.classList.add('float-pizza');
+
+    // Parámetros de movimiento
+    const AMPLITUDE_DESK = 18;  // px
+    const AMPLITUDE_MOB  = 10;  // px
+    const ROT_MAX = 6;          // grados
+    const SCALE_MIN = 0.98, SCALE_MAX = 1.02;
+    const DURATION = 2200;      // ms por tramo hacia un objetivo
+    const HOLD = 200;           // pausa entre saltos
+
+    const isMobile = () => window.matchMedia('(max-width: 680px)').matches;
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const lerp = (a,b,t) => a + (b - a) * t;
+
+    let start = null;
+    let from = {x:0, y:0, r:0, s:1};
+    let to   = nextTarget();
+    let paused = false;
+
+    // Pausa al pasar el mouse (solo desktop)
+    pizza.addEventListener('mouseenter', ()=> paused = true);
+    pizza.addEventListener('mouseleave', ()=> paused = false);
+
+    function nextTarget(){
+      const A = isMobile() ? AMPLITUDE_MOB : AMPLITUDE_DESK;
+      return {
+        x: rand(-A, A),
+        y: rand(-A, A),
+        r: rand(-ROT_MAX, ROT_MAX),
+        s: rand(SCALE_MIN, SCALE_MAX)
+      };
+    }
+
+    function step(ts){
+      if(paused) { requestAnimationFrame(step); return; }
+      if(start === null) start = ts;
+      const t = Math.min(1, (ts - start) / DURATION);
+      // easing suave
+      const eased = t<.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+
+      const x = lerp(from.x, to.x, eased);
+      const y = lerp(from.y, to.y, eased);
+      const r = lerp(from.r, to.r, eased);
+      const s = lerp(from.s, to.s, eased);
+
+      pizza.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg) scale(${s})`;
+
+      if(t >= 1){
+        // nuevo salto
+        from = to;
+        setTimeout(()=>{
+          start = null;
+          to = nextTarget();
+          requestAnimationFrame(step);
+        }, HOLD);
+      }else{
+        requestAnimationFrame(step);
+      }
+    }
+    requestAnimationFrame(step);
+  })();
+
 
 </script>
 </body>
